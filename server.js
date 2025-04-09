@@ -13,8 +13,11 @@ app.use("/api/products", productRoutes);
 const financeRoutes = require("./routes/financeRoutes");
 app.use("/api/finance", financeRoutes);
 
-app.get('/', (req, res) => {
-  res.send('API do Commerce Manager funcionando! MongoDB está conectado.');
+const saleRoutes = require("./routes/saleRoutes");
+app.use("/api/sale", saleRoutes);
+
+app.get("/", (req, res) => {
+  res.send("API do Commerce Manager funcionando! MongoDB está conectado.");
 });
 
 mongoose
