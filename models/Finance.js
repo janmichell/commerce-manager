@@ -1,9 +1,10 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const financeSchema = new mongoose.Schema({
-  description: String,
-  amount: Number,
-  date: { type: Date, default: Date.now }
+  description: { type: String, required: true },
+  amount: { type: Number, required: true },
+  type: { type: String, enum: ["entrada", "saida"], required: true },
+  date: { type: Date, default: Date.now },
 });
 
-module.exports = mongoose.model('Finance', financeSchema);
+module.exports = mongoose.model("Finance", financeSchema);
