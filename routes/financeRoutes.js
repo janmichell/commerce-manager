@@ -1,8 +1,11 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const { getFinance, addFinance } = require('../controllers/financeController');
+const financeController = require("../controllers/financeController");
 
-router.get('/', getFinance);
-router.post('/', addFinance);
+// Rota para listar registros financeiros
+router.get("/", financeController.getFinance);
+
+// Rota para adicionar um novo registro financeiro
+router.post("/", financeController.addFinance);
 
 module.exports = router;

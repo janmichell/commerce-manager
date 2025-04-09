@@ -1,14 +1,22 @@
-const Finance = require('../models/Finance');
+const Finance = require("../models/Finance");
 
-const getFinance = async (req, res) => {
-  const records = await Finance.find();
-  res.json(records);
+// Listar todos os registros financeiros
+exports.getFinance = async (req, res) => {
+  try {
+    const records = await Finance.find();
+    res.json(records);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 };
 
-const addFinance = async (req, res) => {
-  const record = new Finance(req.body);
-  await record.save();
-  res.json(record);
+// Adicionar novo registro financeiro
+exports.addFinance = async (req, res) => {
+  try {
+    const record = new Finance(req.body);
+    await record.save();
+    res.status(201).json(record);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
 };
-
-module.exports = { getFinance, addFinance };
