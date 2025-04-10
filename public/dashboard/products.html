@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Commerce Manager - Products</title>
+  <link rel="stylesheet" href="../css/products.css" />
+</head>
+<body>
+  <div class="container">
+    <nav class="sidebar" id="sidebar">
+      <button id="toggleSidebar">☰</button>
+      <ul>
+        <li><a href="/dashboard/products.html" class="active">Products</a></li>
+        <li><a href="/dashboard/sales.html">Sales</a></li>
+        <li><a href="/dashboard/finance.html">Finance</a></li>
+        <li><a href="/dashboard/index.html">Dashboard</a></li>
+      </ul>
+    </nav>
+
+    <main class="content">
+      <h1>Products</h1>
+      <form id="productForm">
+        <input type="text" name="name" placeholder="Product Name" required />
+        <input type="text" name="externalId" placeholder="External ID (Tag Number)" required />
+        <textarea name="description" placeholder="Description"></textarea>
+        <input type="number" name="cost" placeholder="Cost" required />
+        <input type="number" name="tax" placeholder="Tax" step="0.01" />
+        <input type="url" name="supplierLink" placeholder="Supplier Link" />
+        <textarea name="adText" placeholder="Ad Text"></textarea>
+        <input type="number" name="price" placeholder="Sale Price" required />
+        <input type="url" name="imageUrl" placeholder="Image URL" />
+        <button type="submit">Add Product</button>
+      </form>
+
+      <div id="productList"></div>
+    </main>
+  </div>
+
+  <script src="./js/products.js"></script>
+</body>
+</html>

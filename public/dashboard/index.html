@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard - Commerce Manager</title>
+  <link rel="stylesheet" href="../css/index.css" />
+</head>
+<body>
+  <div class="container">
+    <aside id="sidebar" class="sidebar">
+      <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+      <h2>Menu</h2>
+      <ul>
+        <li><a href="products.html">Produtos</a></li>
+        <li><a href="#">Vendas</a></li>
+        <li><a href="#">Financeiro</a></li>
+        <li><a href="#">Usuários</a></li>
+        <li><a href="../login.html" onclick="logout()">Sair</a></li>
+      </ul>
+    </aside>
+
+    <main class="main-content">
+      <h1>Bem-vindo ao painel administrativo!</h1>
+      <p>Escolha uma das opções no menu lateral para começar.</p>
+    </main>
+  </div>
+
+  <script>
+    function logout() {
+      localStorage.removeItem("token");
+    }
+
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      sidebar.classList.toggle('collapsed');
+    }
+
+    // Redireciona para login se não estiver autenticado
+    const token = localStorage.getItem("token");
+    if (!token) {
+      window.location.href = "../login.html";
+    }
+  </script>
+</body>
+</html>
