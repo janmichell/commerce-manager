@@ -16,6 +16,16 @@ app.use("/api/finance", financeRoutes);
 const saleRoutes = require("./routes/saleRoutes");
 app.use("/api/sale", saleRoutes);
 
+const authRoutes = require("./routes/authRoutes");
+app.use("/api/auth", authRoutes);
+
+const protectedRoutes = require("./routes/protectedRoutes");
+app.use("/api/protected", protectedRoutes);
+
+//const { protect } = require("./middleware/authMiddleware");
+//app.use("/api/protected", protect, protectedRoutes);
+
+
 app.get("/", (req, res) => {
   res.send("API do Commerce Manager funcionando! MongoDB está conectado.");
 });
