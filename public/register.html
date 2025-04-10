@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registrar - Commerce Manager</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    form { max-width: 300px; margin: auto; }
+    label { display: block; margin-top: 10px; }
+    input, select { width: 100%; padding: 8px; }
+    button { margin-top: 20px; padding: 10px; width: 100%; }
+    #message { margin-top: 20px; text-align: center; }
+  </style>
+</head>
+<body>
+  <h2>Registro</h2>
+  <form id="registerForm">
+    <label for="username">Usuário:</label>
+    <input type="text" id="username" required>
+    
+    <label for="password">Senha:</label>
+    <input type="password" id="password" required>
+    
+    <label for="role">Função:</label>
+    <select id="role">
+      <option value="vendedor" selected>Vendedor</option>
+      <option value="gerente">Gerente</option>
+      <option value="admin">Administrador</option>
+    </select>
+    
+    <button type="submit">Registrar</button>
+  </form>
+  <div id="message"></div>
+
+  <script>
+    const registerForm = document.getElementById('registerForm');
+    registerForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      const role = document.getElementById('role').value;
+      
+      try {
+        const response = await fetch('/api/auth/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, password, role })
+        });
+        const data = await response.json();
+        const messageDiv = document.getElementById('message');
+        if (response.ok) {
+          messageDiv.textContent = data.message || 'Usuário registrado com sucesso! Redirecionando para login em 5 segundos...';
+          // Inicia o contador regressivo de 5 segundos
+          let seconds = 5;
+          const interval = setInterval(() => {
+            seconds--;
+            messageDiv.textContent = `Usuário registrado com sucesso! Redirecionando para login em ${seconds} segundos...`;
+            if (seconds <= 0) {
+              clearInterval(interval);
+              window.location.href = '/login.html'; // Redireciona para a página de login
+            }
+          }, 1000);
+        } else {
+          messageDiv.textContent = 'Erro: ' + (data.error || 'Não foi possível fazer o registro.');
+        }
+      } catch (error) {
+        document.getElementById('message').textContent = 'Erro: ' + error.message;
+      }
+    });
+  </script>
+</body>
+</html>
